@@ -27,9 +27,15 @@ nS=mc.nStates;
 InitDistr = DiscreteD(mc.InitialProb);
 S(1) = rand(InitDistr, 1);
 
+TranDistrArray = [];
+for i=1:nS
+    TranDistrArray = [TranDistrArray, DiscreteD(mc.TransitionProb(i,:))];
+end
+
+
+
 for i=2:T
-    TranDistr = DiscreteD(mc.TransitionProb(S(i-1),:));
-    S(i) = rand(TranDistr, 1);
+    S(i) = rand(TranDistrArray(S(i-1)), 1);
     if S(i) == nS+1
         S = S(1:i-1);
         break;
