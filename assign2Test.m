@@ -1,5 +1,12 @@
 %% -- Assignement 2 --
 %
+% TODO :
+%  - Nettoyer le code (trop long)
+%  - Verifier comment normaliser data MFCCs
+%  - Se renseigner sur les dynamic features...
+% 
+% 
+% !!!Check that 'sound.wav is in the current directory
 %
 % close all;clear; clc;
 
