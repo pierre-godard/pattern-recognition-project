@@ -73,25 +73,39 @@ startVoicedSound = 0.3; % in seconds
 %
 endUnvoicedSound = range + startUnvoicedSound;
 endVoicedSound = range + startVoicedSound;
+time = (1:length(sampleFemale))/sampleRateFemale;
 figure;
-    subplot(1, 2, 1);
+    subplot(2, 2, 1);
         imagesc(timesFemale, frequenciesFemale, log10(spectrogramFemale));
         xlim([startUnvoicedSound endUnvoicedSound]);
         colormap winter;
         colorbar;
         xlabel('Time (in seconds)'); 
         ylabel('Frequency (in hertz)');
-        title('(a) zoomed in an unvoiced sound region'); 
-    subplot(1, 2, 2);
+        title('(a) logarithmic spectogram in an unvoiced sound region'); 
+    subplot(2, 2, 2);
         imagesc(timesFemale, frequenciesFemale, log10(spectrogramFemale));
         xlim([startVoicedSound endVoicedSound]);
         colormap winter;
         colorbar;
         xlabel('Time (in seconds)'); 
         ylabel('Frequency (in hertz)');
-        title('(b) zoomed in a voiced sound region');
+        title('(b) logarithmic spectogram in a voiced sound region');
+    subplot(2, 2, 3);
+        plot(time, sampleFemale);
+        xlim([startUnvoicedSound endUnvoicedSound]);
+        xlabel('Time (in seconds)');
+        ylabel('Amplitude');
+        title('(c) signal in an unvoiced sound region');
+    subplot(2, 2, 4);
+        plot(time, sampleFemale);
+        xlim([startVoicedSound endVoicedSound]);
+        xlabel('Time (in seconds)');
+        ylabel('Amplitude');
+        title('(d) signal in an voiced sound region');
+        
     axes('Position',[0 0 1 1],'Xlim',[0 1],'Ylim',[0 1],'Box','off','Visible','off','Units','normalized', 'clipping' , 'off');
-    text(0.5, 1,'\bf Female speech signal logarithmic spectrogram','HorizontalAlignment','center','VerticalAlignment', 'top', 'FontSize', 12);
+    text(0.5, 1,'\bf Female speech signal zooms','HorizontalAlignment','center','VerticalAlignment', 'top', 'FontSize', 12);
 
 %% A.2.2 - MFCCs (Mel Frequency Cepstrum Coefficients)
 %%
