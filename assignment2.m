@@ -12,8 +12,8 @@
 [sampleMale, sampleRateMale] = audioread('male.wav');
 
 %%
-% Read a sample
-sound(sampleFemale, sampleRateFemale);
+% Play a sample
+%sound(sampleFemale, sampleRateFemale);
 %sound(sampleMusic, sampleRateMusic);
 %sound(sampleMale, sampleRateMale);
 
@@ -274,13 +274,4 @@ ddMale = diff(dMale, 1, 2);
 featFemale = cat(1, mfccsFemale(:,1:end-2), dFemale(:,1:end-1), ddFemale);
 featMusic = cat(1, mfccsMusic(:,1:end-2), dMusic(:,1:end-1), ddMusic);
 featMale = cat(1, mfccsMale(:,1:end-2), dMale(:,1:end-1), ddMale);
-
-
-
-
-
-
-
-
-
 
