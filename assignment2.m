@@ -52,6 +52,7 @@ figure;
     colorbar;
     xlabel('Time (in seconds)'); 
     ylabel('Frequency (in hertz)');
+    ylim([0 5000]);
     title('Female speech signal logarithmic spectrogram'); 
 
 %%
@@ -62,6 +63,7 @@ figure;
     colorbar;
     xlabel('Time (in seconds)'); 
     ylabel('Frequency (in hertz)');
+    ylim([0 5000]);
     title('Music signal logarithmic spectrogram'); 
 
 %%
@@ -76,7 +78,7 @@ endVoicedSound = range + startVoicedSound;
 time = (1:length(sampleFemale))/sampleRateFemale;
 figure;
     subplot(2, 2, 1);
-        imagesc(timesFemale, frequenciesFemale, log10(spectrogramFemale));
+        imagesc(timesFemale, frequenciesFemale/1000, log10(spectrogramFemale));
         xlim([startUnvoicedSound endUnvoicedSound]);
         colormap winter;
         colorbar;
@@ -84,7 +86,7 @@ figure;
         ylabel('Frequency (in hertz)');
         title('(a) logarithmic spectogram in an unvoiced sound region'); 
     subplot(2, 2, 2);
-        imagesc(timesFemale, frequenciesFemale, log10(spectrogramFemale));
+        imagesc(timesFemale, frequenciesFemale/1000, log10(spectrogramFemale));
         xlim([startVoicedSound endVoicedSound]);
         colormap winter;
         colorbar;
@@ -278,14 +280,10 @@ figure;
 
 %% A.2.2 - Dynamic Features
 %%
-% Compute the dynamic features
-dFemale = diff(mfccsFemale, 1, 2);
-dMusic = diff(mfccsMusic, 1, 2);
-dMale = diff(mfccsMale, 1, 2);
-ddFemale = diff(dFemale, 1, 2);
-ddMusic = diff(dMusic, 1, 2);
-ddMale = diff(dMale, 1, 2);
-featFemale = cat(1, mfccsFemale(:,1:end-2), dFemale(:,1:end-1), ddFemale);
-featMusic = cat(1, mfccsMusic(:,1:end-2), dMusic(:,1:end-1), ddMusic);
-featMale = cat(1, mfccsMale(:,1:end-2), dMale(:,1:end-1), ddMale);
-
+% Compute the dynamic features and add it to the static ones
+windowLength = 0.03; % in seconds
+numberCepstralCoefficients = 13; % including the zeroth coefficient
+%
+featFemale = FeaturesExtraction(sampleFemale, sampleRateFemale, windowLength, numberCepstralCoefficients);
+featMusic = FeaturesExtraction(sampleFemale, sampleRateFemale, windowLength, numberCepstralCoefficients);
+featMale = FeaturesExtraction(sampleFemale, sampleRateFemale, windowLength, numberCepstralCoefficients);
