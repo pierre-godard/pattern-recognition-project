@@ -21,7 +21,7 @@ function [ features ] = FeaturesExtraction( sample, sampleRate, windowLength, nu
     [mfccs] = GetSpeechFeatures(sample, sampleRate, windowLength, numberCoefficients);
 
     % Velocity
-    d = diff(mfccsMale, 1, 2);
+    d = diff(mfccs, 1, 2);
     % Acceleration
     dd = diff(d, 1, 2);
 
