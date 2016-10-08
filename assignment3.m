@@ -4,21 +4,13 @@
 %    Corentin Abgrall
 %    Pierre Godard
 %
-%% A.3.1 - The Forward Algorithm - Verify the implementation
+%%
+% This file run some test scripts you can found in the folder tests.
+% Please add the test folder to your path before running this script.
+%
 %%
 %
-
 result = runtests('forwardAlgorithm');
+result = [result runtests('probabilityFeatureSequence')];
+result = [result runtests('backwardAlgorithm')];
 disp(table(result));
-
-%% A.3.1 - The Forward Algorithm - Probability of a feature sequence
-%%
-%
-
-result = runtests('probabilityFeatureSequence');
-disp(table(result));
-
-%% A.3.2 - The Backward Algorithm - Verify the implementation
-%%
-%
-
