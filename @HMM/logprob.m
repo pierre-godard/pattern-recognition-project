@@ -27,23 +27,13 @@
 %----------------------------------------------------
 
 function logP=logprob(hmm,x)
+
 hmmSize=size(hmm);      %size of hmm array
 T=size(x,2);            %number of vector samples in observed sequence
 logP=zeros(hmmSize);    %space for result
 
-
-
-
 for i=1:numel(hmm)  %for all HMM objects
-    %Note: array elements can always be accessed as hmm(i),
-    %regardless of hmmSize, even with multi-dimensional array.
-    %
-    %logP(i)= result for hmm(i)
-    %continue coding from here, and delete the error message.
-    
     [p, logS] = prob(hmm(i).OutputDistr, x);
     [~,c] = forward(hmm(i).StateGen, p);
     logP(i) = sum(log(c)) + sum(logS());
-    
-
 end;
