@@ -11,6 +11,7 @@ gaussian2 = GaussD('Mean', 3, 'StDev', 2);
 gaussians = [gaussian1; gaussian2];
 hmm = HMM(markovChain, gaussians);
 
+
 logP = logprob(hmm, featureSequence);
 
 assert(isequal(logPTest, round(logP, 4)));
