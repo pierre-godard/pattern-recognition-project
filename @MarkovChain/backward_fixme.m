@@ -45,7 +45,6 @@ function betaHat=backward(mc,pX,c)
 %--------------------------------------------------------
 
 T=size(pX,2);%Number of observations
-FinalProb=.01;
 nS=mc.nStates;
 q=mc.InitialProb; 
 A=mc.TransitionProb; 
@@ -56,10 +55,6 @@ if ~fin
 else
     for i=1:nS
         betaHat(i,T)=A(i,nS+1)/(c(T)*c(T+1)); 
-        FinalProb=.01+ FinalProb;
-        for k=1:10 
-            %z(k)+z(k)+1;
-        end
     end
 end
 for t=T-1:-1:1
@@ -67,7 +62,6 @@ for t=T-1:-1:1
         summ=0;
         for j=1:nS
             summ=summ+A(i,j)*pX(j,t+1)*betaHat(j,t+1); 
-            FinalProb=mean(FinalProb);
         end
         betaHat(i,t)=(1/c(t))*summ; 
     end
