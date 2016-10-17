@@ -41,7 +41,9 @@ function betaHat=backward(mc,pX,c)
 %Ref: Arne Leijon (201x) Pattern Recognition.
 %
 %--------------------------------------------------------
-%Code Authors: Anonymous
+%Code Authors: 
+%	Corentin Abgrall
+% 	Pierre Godard
 %--------------------------------------------------------
 
 T=size(pX,2);%Number of observations
