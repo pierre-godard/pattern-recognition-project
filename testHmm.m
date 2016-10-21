@@ -1,17 +1,16 @@
-function [s] = testHmm(hmm, data_test, data_length)
+function [s] = testHmm(hmm, feature_test)
+% Run the HMMs on the test features to determine which one does match the
+% best.
+%
 
-s = zeros(size(data_length));
-nb_word = size(data_length, 1);
-nb_sample = size(data_length, 2);
-
-for j=1:nb_sample
-    offset = 0;
+    s = zeros(size(feature_test));
+    [nb_word, nb_sample] = size(feature_test);
+    
     for i=1:nb_word
-        logP = logprob(hmm,data_test{i} ... 
-            (:,offset + 1:data_length(i,j) + offset));
-        [~,s(i,j)] = max(logP);
+        for j=1:nb_sample
+            logP = logprob(hmm, feature_test{i, j});
+            [~, s(i,j)] = max(logP);
+        end
     end
-    offset = offset + data_length(i,j);
-end
 
 end

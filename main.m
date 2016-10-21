@@ -18,17 +18,23 @@ nb_sample = 16;
 %%
 
 feature = extractAllData(words, folder);
-featureShuffled = shuffle(feature);
-[data, data_length] = convertToRightDataForm(featureShuffled);
+%featureShuffled = shuffle(feature);
+%[data, data_length] = convertToRightForm(featureShuffled);
 
 
 %% Determination of number of states for each HMM
 %% 
 
-% Need to implement : nbStatePerWord
-nb_class_word = [3 4 3 3 4 3 4 3 4 3 3] + 2;
-% nb_class_word_pronostic = [3 4 3 3 4 3 4 3 4 3 3];
-% nb_class_word = nbStatePerWord(nb_class_word_pronostic, data, data_length);
+% The nb_class_word variable returned the last time in ran the section
+% (with a threshold=1.0).
+% nb_class_word = [3 6 2 5 4 4 4 4 5 3 6];
+nb_class_word = nbStatePerWord(shuffle(feature), 2, 7, 1.0);
+
+% Questions:
+% - Is there a better way to fix the threshold? (and to deal with nb_part?)
+% - Can't we use more test data (from the training set of other hmms)?
+% - Can't we optimize by not doing the computations once the threshold is
+% reached?
 
 
 %% Cross val
