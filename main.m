@@ -1,6 +1,6 @@
 %% TODO
 %% 
-% Function to determine nb_class_word : intervalle [min, max] for each words and  ouputs the
+% Function to determine nb_class_word : intervalle [min, max] for each words and ouputs the
 % best value/HMM
 % Script pour record
 % Save/Load hmm functions
@@ -28,7 +28,7 @@ feature = extractAllData(words, folder);
 % The nb_class_word variable returned the last time in ran the section
 % (with a threshold=1.0).
 % nb_class_word = [3 6 2 5 4 4 4 4 5 3 6];
-nb_class_word = nbStatePerWord(shuffle(feature), 2, 7, 1.0);
+nb_class_word = nbStatePerWord(shuffle(feature), 2, 7, 1.0, @testHmmProb);
 
 % Questions:
 % - Is there a better way to fix the threshold? (and to deal with nb_part?)
