@@ -27,8 +27,11 @@ feature = extractAllData(words, folder);
 
 % The nb_class_word variable returned the last time in ran the section
 % (with a threshold=1.0).
-% nb_class_word = [3 6 2 5 4 4 4 4 5 3 6];
-nb_class_word = nbStatePerWord(shuffle(feature), 2, 7, 1.0, @testHmmProb);
+% nb_class_word = [6 5 8 2 7 5 3 3 7 7 5]; % Celui là est fait avec
+% logprob, c'est le plus sensé à mon avis
+% nb_class_word = [11 17 14 20 20 14 20 20 17 10 14]; % Celui-là est fait
+% avec 3 états par phonèmes
+[measures, nb_class_word] = nbStatePerWord(shuffle(feature), 2, 4, 20, @testHmmProb);
 
 % Questions:
 % - Is there a better way to fix the threshold? (and to deal with nb_part?)
@@ -43,17 +46,26 @@ nb_class_word = nbStatePerWord(shuffle(feature), 2, 7, 1.0, @testHmmProb);
 nb_part = 4;
 s = crossValidation(nb_part, shuffle(feature), nb_class_word);
 
+%% Error rate
+%%
+
+nb_errors = s - repmat(1:nb_word, nb_sample, 1)' ~= 0;
+error_rate = sum(sum(nb_errors)) / (nb_word * nb_sample);
+error_rate_word = sum(nb_errors, 2) / nb_sample;
 
 %% Confusion matrix 
 %%
+% Compute confusion matrix
 
 conf = makeConfusionMatrix(s, nb_word, nb_sample);
 
-
-%% Plot confusion matrix
 %%
+% Plot confusion matrix
 
 figure; 
 imagesc(conf);
 colorbar;
+set(gca,'XTick',1:nb_word,'XTicklabel',words,'YTick',1:nb_word,'YTicklabel',words);
+ylabel('Found word');
+xlabel('Spoken word');
 

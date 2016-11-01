@@ -9,7 +9,7 @@ nb_word = size(words, 2);
 %% Train the HMM
 %%
 
-nb_class_word = [3 4 3 3 4 3 4 3 4 3 3] + 4;
+nb_class_word = [11 17 14 20 20 14 20 20 17 10 14];
 % nb_class_word_pronostic = [3 4 3 3 4 3 4 3 4 3 3];
 % nb_class_word = nbStatePerWord(nb_class_word_pronostic, data, data_length);
 
@@ -32,6 +32,8 @@ pause;
 display('Start recording...');
 recordblocking(recObj, 3);
 display('done');
+
+recOb
 
 % Get the feature vector
 windowLength = 0.03;

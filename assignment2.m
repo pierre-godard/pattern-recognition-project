@@ -154,7 +154,7 @@ figure;
         imagesc(timesFemale, 0:size(mfccsFemale, 1)-1, mfccsFemale);
         colormap winter;
         colorbar;
-        xlabel('Time (in seconds)'); 
+        xlabel('Time (in seconds)');
         ylabel('Coefficients');
         title('(b) cepstrogram'); 
     axes('Position',[0 0 1 1],'Xlim',[0 1],'Ylim',[0 1],'Box','off','Visible','off','Units','normalized', 'clipping' , 'off');
